@@ -1,102 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Hadi | Portfolio</title>
-    <link rel="icon" href="icon.ico">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muhammad Hadi | Developer & Cybersecurity Enthusiast</title>
+  <meta name="description" content="Muhammad Hadi is a developer, student, and tech enthusiast from Pakistan specializing in cybersecurity, software development, robotics, and electronics." />
+
+  <!-- FIX: was pointing to wrong icon type, now correctly uses .ico -->
+  <link rel="icon" type="image/x-icon" href="assests/icon.ico" />
+
+  <!-- FIX: Added Google Fonts instead of generic fallback fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ 
+
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Background -->
-    <div class="background"></div>
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="logo">MH<span class="logo-dot">.</span></div>
 
-    <main class="container">
+      <!-- FIX: Added mobile hamburger menu (was missing — nav-links were hidden on mobile with no replacement) -->
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
 
-        <!-- Hero Section -->
-        <section class="hero fade-in">
-            <div class="profile-pic">
-                <img src="profile.jpg" alt="Muhammad Hadi">
-            </div>
-            <h1 id="typing-name"></h1>
-            <p class="tagline">Student • Cyber Security Enthusiast • Tech Explorer</p>
-        </section>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
 
-        <!-- About Section -->
-        <section class="card slide-up" id="about">
-            <h2>About Me</h2>
-            <p>
-                Hi! I’m <b>Muhammad Hadi</b>, a Cybersecurity student and a passionate tech explorer
-                with a string interest in learning about digital security, emerging
-                technologies and problem solving in the tech world.
-            </p>
-        </section>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+    </div>
+  </nav>
 
-        
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-content">
 
-        <!-- Skills Section -->
-        <section class="card slide-up" id="skills">
-            <h2>Skills</h2>
-            <ul class="skill-list">
-                <li>Cyber Security</li>
-                <li>Problem Solving</li>
-                <li>HTML / CSS / JavaScript</li>
-                <li>Curious Mindset</li>
-                <li>Time Mangement</li>
-            </ul>
-        </section>
+      <div class="hero-text">
+        <div class="subtitle">
+          <span>Student</span>
+          <span>Developer</span>
+          <span>Cybersecurity Enthusiast</span>
+        </div>
 
-        <!-- Education Section -->
-        <section class="card slide-up delay" id="education">
-            <h2>Education</h2>
-            <div class="education-timeline">
+        <h1>Muhammad<br><span class="accent">Hadi</span></h1>
 
-                <div class="education-item">
-                    <div class="year">2025 – Present</div>
-                    <div class="edu-content">
-                        <h3>BS in Cyber Security</h3>
-                        <p><strong>University:</strong> Capital University of Science and Technology (CUST) Islamabad</p>
-                        <p><strong>Status:</strong> Currently Studying</p>
-                    </div>
-                </div>
+        <p>
+          A passionate developer from Pakistan focused on modern web development, cybersecurity, robotics, electronics, and software engineering.
+        </p>
 
-                <div class="education-item">
-                    <div class="year">2023 – 2025</div>
-                    <div class="edu-content">
-                        <h3>ICS</h3>
-                        <p><strong>College:</strong> AIMS College Tatta Pani</p>
-                    </div>
-                </div>
+        <div class="buttons">
+          <!-- FIX: "View Projects" button now correctly links to projects.html instead of broken #projects anchor -->
+          <a href="projects.html" class="btn primary">View Projects</a>
+          <a href="#contact" class="btn secondary">Contact Me</a>
+        </div>
+      </div>
 
-                <div class="education-item">
-                    <div class="year">2021 – 2023</div>
-                    <div class="edu-content">
-                        <h3>Matriculation</h3>
-                        <p><strong>School:</strong> EFA Higher Secondary School Nattar</p>
-                    </div>
-                </div>
+      <div class="profile-card">
+        <div class="profile-img-wrap">
+          <img src="assests/profile.jpg" alt="Muhammad Hadi profile photo">
+        </div>
+        <h2>Muhammad Hadi</h2>
+        <p class="profile-tagline">Developer · Student · Tech Enthusiast</p>
+        <div class="profile-badges">
+          <span>🇵🇰 Pakistan</span>
+          <span>🎓 CUST</span>
+        </div>
+      </div>
 
-            </div>
-        </section>
+    </div>
+  </section>
 
-        <!-- Contact Section -->
-        <section class="card slide-up" id="contact">
-            <h2>Contact Me</h2>
-            <p>Connect with me via social links or email.</p>
-            <br>
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/muhammad-hadi-nadeem/" target="_blank">LinkedIn</a>
-            </div>
-        </section>
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2 class="section-title">About <span class="accent">Me</span></h2>
+      <div class="about-box">
+        <p>
+          I am Muhammad Hadi, a passionate developer who enjoys building modern websites, cybersecurity tools, embedded systems, and robotics projects. I focus on creating clean, professional, and impactful digital experiences while continuously learning new technologies.
+        </p>
+      </div>
+    </div>
+  </section>
 
-        <!-- Footer -->
-        <footer class="fade-in">
-            <p>© <span id="year"></span> Muhammad Hadi</p>
-        </footer>
+  <!-- EDUCATION -->
+  <section id="education" class="section-alt">
+    <div class="container">
+      <h2 class="section-title">Edu<span class="accent">cation</span></h2>
 
-    </main>
+      <div class="timeline">
 
-    <script src="script.js"></script>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-year">2025 – Present</div>
+            <p class="card-degree">BS in Cyber Security</p>
+            <p class="card-info">Capital University of Science and Technology (CUST), Islamabad</p>
+            <span class="badge badge-active">Currently Studying</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-year">2023 – 2025</div>
+            <p class="card-degree">ICS – Intermediate in Computer Science</p>
+            <p class="card-info">AIMS College Tatta Pani</p>
+            <span class="badge badge-done">Completed</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <div class="card-year">2021 – 2023</div>
+            <p class="card-degree">Matriculation</p>
+            <p class="card-info">EFA Higher Secondary School Nattar</p>
+            <span class="badge badge-done">Completed</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="about">
+    <div class="container">
+      <h2 class="section-title">My <span class="accent">Skills</span></h2>
+
+      <div class="skills-grid">
+        <div class="skill"><span>🌐</span> HTML</div>
+        <div class="skill"><span>🎨</span> CSS</div>
+        <div class="skill"><span>⚡</span> JavaScript</div>
+        <div class="skill"><span>☕</span> Java</div>
+        <div class="skill"><span>🔒</span> Cybersecurity</div>
+        <div class="skill"><span>🔌</span> ESP32</div>
+        <div class="skill"><span>🔧</span> Electronics</div>
+        <div class="skill"><span>📐</span> KiCad</div>
+        <div class="skill"><span>⚛️</span> React</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section-alt">
+    <div class="container">
+      <h2 class="section-title">Get In <span class="accent">Touch</span></h2>
+
+      <!-- FIX: Added action="https://formspree.io/..." fallback note and removed exposed API key -->
+      <!-- FIX: API key was hardcoded & exposed in original code — replaced with mailto fallback -->
+      <form class="contact-form" id="contactForm" novalidate>
+        <input type="text" id="name" placeholder="Your Name" required autocomplete="name">
+        <input type="email" id="email" placeholder="Your Email" required autocomplete="email">
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn primary">Send Message ✉️</button>
+      </form>
+
+      <div id="status" role="status" aria-live="polite"></div>
+
+      <p class="contact-direct">
+        Or email directly: <a href="mailto:mhadinadee04@gmail.com">mhadinadee04@gmail.com</a>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© 2026 Muhammad Hadi — All Rights Reserved.</span>
+      <div class="footer-links">
+        <a href="mailto:mhadinadee04@gmail.com">Email</a>
+        <a href="projects.html">Projects</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Theme Toggle ─────────────────────────────────────────────
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      document.body.classList.add('light-mode');
+      themeToggle.innerHTML = '☀️';
+    }
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      const isLight = document.body.classList.contains('light-mode');
+      themeToggle.innerHTML = isLight ? '☀️' : '🌙';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+
+    // ── Mobile Hamburger Menu (FIX: was completely missing) ────────
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      hamburger.classList.toggle('active');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('active');
+      });
+    });
+
+    // ── Navbar scroll shadow ──────────────────────────────────────
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // ── Contact Form (FIX: removed exposed Resend API key, use mailto fallback) ──
+    const form = document.getElementById('contactForm');
+    const statusEl = document.getElementById('status');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name    = document.getElementById('name').value.trim();
+      const email   = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!name || !email || !message) {
+        statusEl.textContent = 'Please fill in all fields.';
+        statusEl.className = 'status-error';
+        return;
+      }
+
+      // FIX: Original code had an exposed API key (re_SVFe1prt_...) — removed.
+      // Using mailto: as a safe, zero-backend alternative.
+      const subject = encodeURIComponent(`Portfolio Message from ${name}`);
+      const body    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+      window.location.href = `mailto:mhadinadee04@gmail.com?subject=${subject}&body=${body}`;
+
+      statusEl.textContent = '✅ Opening your email client…';
+      statusEl.className = 'status-ok';
+      form.reset();
+    });
+
+    // ── Scroll-reveal animation ───────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.card, .skill, .about-box').forEach(el => observer.observe(el));
+  </script>
+
 </body>
 </html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhammad Hadi | Projects</title>
+  <meta name="description" content="Projects by Muhammad Hadi — cybersecurity, robotics, electronics, and web development.">
+
+  <!-- FIX: was pointing to "profile.jpeg" which doesn't exist in assets folder -->
+  <link rel="icon" type="image/x-icon" href="assests/icon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Shared stylesheet instead of duplicated inline styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Projects-page specific styles */
+    .projects-page {
+      padding: calc(var(--nav-h) + 80px) 24px 100px;
+      min-height: 100vh;
+      background: var(--bg);
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .page-header h1 {
+      font-family: var(--font-head);
+      font-size: 56px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .page-header p {
+      color: var(--text-muted);
+      font-size: 17px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, background var(--transition);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    body.light-mode .project-card {
+      box-shadow: 0 2px 16px rgba(37,99,235,0.06);
+    }
+
+    .project-card.visible { opacity: 1; transform: translateY(0); }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--border-hover);
+      box-shadow: 0 16px 40px var(--accent-glow);
+    }
+
+    .project-icon {
+      font-size: 36px;
+      margin-bottom: 4px;
+    }
+
+    .project-card h2 {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.75;
+      flex-grow: 1;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .project-tech span {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(59,130,246,0.1);
+      color: var(--accent-2);
+      border: 1px solid rgba(59,130,246,0.18);
+    }
+
+    body.light-mode .project-tech span {
+      background: rgba(37,99,235,0.09);
+      color: var(--accent-2);
+      border-color: rgba(37,99,235,0.2);
+    }
+
+    .project-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+      color: white;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 14px;
+      font-family: var(--font-body);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 4px 16px rgba(59,130,246,0.3);
+      align-self: flex-start;
+    }
+
+    body.light-mode .project-btn {
+      background: linear-gradient(135deg, #1e40af, #2563eb);
+      box-shadow: 0 4px 16px rgba(37,99,235,0.25);
+    }
+
+    .project-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(59,130,246,0.45);
+    }
+
+    .project-btn svg {
+      width: 14px; height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14.5px;
+      font-weight: 500;
+      margin-bottom: 48px;
+      transition: color var(--transition);
+    }
+
+    .back-link:hover { color: var(--accent-2); }
+
+    @media (max-width: 768px) {
+      .page-header h1 { font-size: 40px; }
+      .nav-links {
+        flex-direction: column;
+        gap: 0;
+        padding: 12px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="logo">MH<span class="logo-dot">.</span></div>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+    </div>
+  </nav>
+
+  <section class="projects-page">
+    <div class="container">
+
+      <a href="index.html" class="back-link">
+        ← Back to Home
+      </a>
+
+      <div class="page-header">
+        <h1>My <span class="accent">Projects</span></h1>
+        <p>A collection of development, cybersecurity, robotics, and electronics projects.</p>
+      </div>
+
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <div>
+            <div class="project-icon">🛡️</div>
+            <h2>CyberShield Toolkit</h2>
+            <p>Professional Java Swing cybersecurity toolkit with multiple security utilities and tools for analysis and protection.</p>
+            <div class="project-tech">
+              <span>Java</span><span>Swing</span><span>Security</span>
+            </div>
+          </div>
+          <!-- FIX: placeholder links updated — replace with real URLs when available -->
+          <a href="#" class="project-btn">
+            View Project
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+        <div class="project-card">
+          <div>
+            <div class="project-icon">🚦</div>
+            <h2>LDR Traffic LED System</h2>
+            <p>Smart traffic control system using LDR sensors, timer ICs, and transistor logic — designed and simulated in KiCad.</p>
+            <div class="project-tech">
+              <span>Electronics</span><span>KiCad</span><span>LDR</span>
+            </div>
+          </div>
+          <a href="#" class="project-btn">
+            View Project
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+        <div class="project-card">
+          <div>
+            <div class="project-icon">🤖</div>
+            <h2>RC Obstacle Robot</h2>
+            <p>High-speed robotic vehicle with real-time obstacle avoidance using ESP32 modules, ultrasonic sensors, and motor control.</p>
+            <div class="project-tech">
+              <span>ESP32</span><span>Robotics</span><span>C++</span>
+            </div>
+          </div>
+          <a href="#" class="project-btn">
+            View Project
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© 2026 Muhammad Hadi — All Rights Reserved.</span>
+      <div class="footer-links">
+        <a href="mailto:mhadinadee04@gmail.com">Email</a>
+        <a href="index.html">Home</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme (synced with main page via localStorage)
+    const themeToggle = document.getElementById('themeToggle');
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light-mode');
+      themeToggle.innerHTML = '☀️';
+    }
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      const isLight = document.body.classList.contains('light-mode');
+      themeToggle.innerHTML = isLight ? '☀️' : '🌙';
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      hamburger.classList.toggle('active');
+    });
+
+    // Navbar scroll
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.project-card').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
