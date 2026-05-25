@@ -4,31 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Muhammad Hadi | Developer & Cybersecurity Enthusiast</title>
-  <meta name="description" content="Muhammad Hadi is a developer, student, and tech enthusiast from Pakistan specializing in cybersecurity, software development, robotics, and electronics." />
-
-  <!-- FIX: was pointing to wrong icon type, now correctly uses .ico -->
+  <meta name="description" content="Muhammad Hadi is a developer, student, and tech enthusiast from Pakistan specialising in cybersecurity, software development, robotics, and electronics." />
   <link rel="icon" type="image/x-icon" href="assests/icon.ico" />
-
-  <!-- FIX: Added Google Fonts instead of generic fallback fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- 
 
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- NAVBAR -->
+  <!-- ── NAVBAR ── -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <div class="logo">MH<span class="logo-dot">.</span></div>
 
-      <!-- FIX: Added mobile hamburger menu (was missing — nav-links were hidden on mobile with no replacement) -->
-      <button class="hamburger" id="hamburger" aria-label="Open menu">
-        <span></span><span></span><span></span>
-      </button>
-
       <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#education">Education</a></li>
         <li><a href="projects.html">Projects</a></li>
@@ -37,10 +28,13 @@
       </ul>
 
       <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- ── HERO ── -->
   <section class="hero">
     <div class="hero-bg-grid"></div>
     <div class="hero-content">
@@ -51,15 +45,9 @@
           <span>Developer</span>
           <span>Cybersecurity Enthusiast</span>
         </div>
-
         <h1>Muhammad<br><span class="accent">Hadi</span></h1>
-
-        <p>
-          A passionate developer from Pakistan focused on modern web development, cybersecurity, robotics, electronics, and software engineering.
-        </p>
-
+        <p>A passionate developer from Pakistan focused on modern web development, cybersecurity, robotics, electronics, and software engineering.</p>
         <div class="buttons">
-          <!-- FIX: "View Projects" button now correctly links to projects.html instead of broken #projects anchor -->
           <a href="projects.html" class="btn primary">View Projects</a>
           <a href="#contact" class="btn secondary">Contact Me</a>
         </div>
@@ -67,7 +55,7 @@
 
       <div class="profile-card">
         <div class="profile-img-wrap">
-          <img src="assests/profile.jpg" alt="Muhammad Hadi profile photo">
+          <img src="assests/profile.jpg" alt="Muhammad Hadi">
         </div>
         <h2>Muhammad Hadi</h2>
         <p class="profile-tagline">Developer · Student · Tech Enthusiast</p>
@@ -80,23 +68,20 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
+  <!-- ── ABOUT ── -->
   <section id="about" class="about">
     <div class="container">
       <h2 class="section-title">About <span class="accent">Me</span></h2>
       <div class="about-box">
-        <p>
-          I am Muhammad Hadi, a passionate developer who enjoys building modern websites, cybersecurity tools, embedded systems, and robotics projects. I focus on creating clean, professional, and impactful digital experiences while continuously learning new technologies.
-        </p>
+        <p>I am Muhammad Hadi, a passionate developer who enjoys building modern websites, cybersecurity tools, embedded systems, and robotics projects. I focus on creating clean, professional, and impactful digital experiences while continuously learning new technologies.</p>
       </div>
     </div>
   </section>
 
-  <!-- EDUCATION -->
+  <!-- ── EDUCATION ── -->
   <section id="education" class="section-alt">
     <div class="container">
       <h2 class="section-title">Edu<span class="accent">cation</span></h2>
-
       <div class="timeline">
 
         <div class="timeline-item">
@@ -133,11 +118,10 @@
     </div>
   </section>
 
-  <!-- SKILLS -->
+  <!-- ── SKILLS ── -->
   <section id="skills" class="about">
     <div class="container">
       <h2 class="section-title">My <span class="accent">Skills</span></h2>
-
       <div class="skills-grid">
         <div class="skill"><span>🌐</span> HTML</div>
         <div class="skill"><span>🎨</span> CSS</div>
@@ -152,18 +136,27 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- ── CONTACT ── -->
   <section id="contact" class="section-alt">
     <div class="container">
       <h2 class="section-title">Get In <span class="accent">Touch</span></h2>
 
-      <!-- FIX: Added action="https://formspree.io/..." fallback note and removed exposed API key -->
-      <!-- FIX: API key was hardcoded & exposed in original code — replaced with mailto fallback -->
-      <form class="contact-form" id="contactForm" novalidate>
-        <input type="text" id="name" placeholder="Your Name" required autocomplete="name">
-        <input type="email" id="email" placeholder="Your Email" required autocomplete="email">
-        <textarea id="message" placeholder="Your Message" required></textarea>
-        <button type="submit" class="btn primary">Send Message ✉️</button>
+     
+      <form class="contact-form" id="contactForm"
+            action="https://api.web3forms.com/submit"
+            method="POST">
+
+        <!-- Web3Forms hidden fields -->
+        <input type="hidden" name="access_key" value="e74b7075-1fa4-41b1-97ef-8f4cf16b2e5a">
+        <input type="hidden" name="subject"    value="New Portfolio Message">
+        <input type="hidden" name="redirect"   value="false">
+        <input type="checkbox" name="botcheck" style="display:none">
+
+        <input type="text"  name="name"    id="name"    placeholder="Your Name"    required autocomplete="name">
+        <input type="email" name="email"   id="email"   placeholder="Your Email"   required autocomplete="email">
+        <textarea           name="message" id="message" placeholder="Your Message" required></textarea>
+
+        <button type="submit" class="btn primary" id="submitBtn">Send Message ✉️</button>
       </form>
 
       <div id="status" role="status" aria-live="polite"></div>
@@ -185,70 +178,79 @@
   </footer>
 
   <script>
-    // ── Theme Toggle ─────────────────────────────────────────────
-    const themeToggle = document.getElementById('themeToggle');
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-      document.body.classList.add('light-mode');
-      themeToggle.innerHTML = '☀️';
-    }
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('light-mode');
-      const isLight = document.body.classList.contains('light-mode');
-      themeToggle.innerHTML = isLight ? '☀️' : '🌙';
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    /* ── Theme ─────────────────────────────────── */
+    const themeBtn  = document.getElementById('themeToggle');
+    const applyTheme = () => {
+      const light = localStorage.getItem('theme') === 'light';
+      document.body.classList.toggle('light-mode', light);
+      themeBtn.textContent = light ? '☀️' : '🌙';
+    };
+    applyTheme();
+    themeBtn.addEventListener('click', () => {
+      localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'dark' : 'light');
+      applyTheme();
     });
 
-    // ── Mobile Hamburger Menu (FIX: was completely missing) ────────
-    const hamburger = document.getElementById('hamburger');
-    const navLinks  = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-      hamburger.classList.toggle('active');
+    /* ── Hamburger ─────────────────────────────── */
+    const ham      = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    ham.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      ham.classList.toggle('active', open);
+      ham.setAttribute('aria-expanded', open);
     });
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        hamburger.classList.remove('active');
-      });
-    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      ham.classList.remove('active');
+      ham.setAttribute('aria-expanded', 'false');
+    }));
 
-    // ── Navbar scroll shadow ──────────────────────────────────────
+    /* ── Navbar shadow on scroll ───────────────── */
     window.addEventListener('scroll', () => {
-      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
-    });
+      document.getElementById('navbar').classList.toggle('scrolled', scrollY > 40);
+    }, { passive: true });
 
-    // ── Contact Form (FIX: removed exposed Resend API key, use mailto fallback) ──
-    const form = document.getElementById('contactForm');
+    /* ── Contact form (Web3Forms AJAX) ────────── */
+    const form     = document.getElementById('contactForm');
     const statusEl = document.getElementById('status');
+    const submitBtn= document.getElementById('submitBtn');
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const name    = document.getElementById('name').value.trim();
-      const email   = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
+      submitBtn.disabled   = true;
+      submitBtn.textContent = 'Sending…';
+      statusEl.className   = '';
+      statusEl.textContent = '';
 
-      if (!name || !email || !message) {
-        statusEl.textContent = 'Please fill in all fields.';
-        statusEl.className = 'status-error';
-        return;
+      try {
+        const res  = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body:   new FormData(form)
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          statusEl.textContent = '✅ Message sent! I\'ll get back to you soon.';
+          statusEl.className   = 'status-ok';
+          form.reset();
+        } else {
+          throw new Error(data.message || 'Unknown error');
+        }
+      } catch (err) {
+        statusEl.textContent = '❌ Sending failed. Please email mhadinadee04@gmail.com directly.';
+        statusEl.className   = 'status-error';
+        console.error(err);
+      } finally {
+        submitBtn.disabled   = false;
+        submitBtn.textContent = 'Send Message ✉️';
       }
-
-      // FIX: Original code had an exposed API key (re_SVFe1prt_...) — removed.
-      // Using mailto: as a safe, zero-backend alternative.
-      const subject = encodeURIComponent(`Portfolio Message from ${name}`);
-      const body    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-      window.location.href = `mailto:mhadinadee04@gmail.com?subject=${subject}&body=${body}`;
-
-      statusEl.textContent = '✅ Opening your email client…';
-      statusEl.className = 'status-ok';
-      form.reset();
     });
 
-    // ── Scroll-reveal animation ───────────────────────────────────
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.12 });
+    /* ── Scroll reveal ─────────────────────────── */
+    const observer = new IntersectionObserver(entries =>
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1 }
+    );
     document.querySelectorAll('.card, .skill, .about-box').forEach(el => observer.observe(el));
   </script>
 

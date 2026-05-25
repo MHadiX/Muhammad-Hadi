@@ -1,1 +1,1 @@
-// script.js — shared logic is inlined in each HTML page.
+// script.js — all logic is embedded per-page.
