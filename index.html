@@ -13,7 +13,7 @@
 </head>
 <body>
 
-  <!-- ── NAVBAR ── -->
+
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <div class="logo">MH<span class="logo-dot">.</span></div>
@@ -34,7 +34,7 @@
     </div>
   </nav>
 
-  <!-- ── HERO ── -->
+
   <section class="hero">
     <div class="hero-bg-grid"></div>
     <div class="hero-content">
@@ -68,7 +68,7 @@
     </div>
   </section>
 
-  <!-- ── ABOUT ── -->
+
   <section id="about" class="about">
     <div class="container">
       <h2 class="section-title">About <span class="accent">Me</span></h2>
@@ -78,7 +78,7 @@
     </div>
   </section>
 
-  <!-- ── EDUCATION ── -->
+
   <section id="education" class="section-alt">
     <div class="container">
       <h2 class="section-title">Edu<span class="accent">cation</span></h2>
@@ -118,7 +118,7 @@
     </div>
   </section>
 
-  <!-- ── SKILLS ── -->
+
   <section id="skills" class="about">
     <div class="container">
       <h2 class="section-title">My <span class="accent">Skills</span></h2>
@@ -136,7 +136,7 @@
     </div>
   </section>
 
-  <!-- ── CONTACT ── -->
+
   <section id="contact" class="section-alt">
     <div class="container">
       <h2 class="section-title">Get In <span class="accent">Touch</span></h2>
@@ -146,7 +146,6 @@
             action="https://api.web3forms.com/submit"
             method="POST">
 
-        <!-- Web3Forms hidden fields -->
         <input type="hidden" name="access_key" value="e74b7075-1fa4-41b1-97ef-8f4cf16b2e5a">
         <input type="hidden" name="subject"    value="New Portfolio Message">
         <input type="hidden" name="redirect"   value="false">
@@ -178,7 +177,7 @@
   </footer>
 
   <script>
-    /* ── Theme ─────────────────────────────────── */
+  
     const themeBtn  = document.getElementById('themeToggle');
     const applyTheme = () => {
       const light = localStorage.getItem('theme') === 'light';
@@ -191,7 +190,7 @@
       applyTheme();
     });
 
-    /* ── Hamburger ─────────────────────────────── */
+ 
     const ham      = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
     ham.addEventListener('click', () => {
@@ -205,12 +204,12 @@
       ham.setAttribute('aria-expanded', 'false');
     }));
 
-    /* ── Navbar shadow on scroll ───────────────── */
+
     window.addEventListener('scroll', () => {
       document.getElementById('navbar').classList.toggle('scrolled', scrollY > 40);
     }, { passive: true });
 
-    /* ── Contact form (Web3Forms AJAX) ────────── */
+
     const form     = document.getElementById('contactForm');
     const statusEl = document.getElementById('status');
     const submitBtn= document.getElementById('submitBtn');
@@ -237,7 +236,7 @@
           throw new Error(data.message || 'Unknown error');
         }
       } catch (err) {
-        statusEl.textContent = '❌ Sending failed. Please email mhadinadee04@gmail.com directly.';
+        statusEl.textContent = '❌ Sending failed. Please email mhadinadeem04@gmail.com directly.';
         statusEl.className   = 'status-error';
         console.error(err);
       } finally {
@@ -246,7 +245,6 @@
       }
     });
 
-    /* ── Scroll reveal ─────────────────────────── */
     const observer = new IntersectionObserver(entries =>
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
       { threshold: 0.1 }
