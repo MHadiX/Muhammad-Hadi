@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BulkCerts Studio — Secure Certificate Designer & Generator</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div id="boot-error" class="boot-error hidden" role="alert"></div>
+    <!-- Glow Background Blobs -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <div class="app-studio">
+        <!-- COLUMN 1: LEFT TOOLBAR PANEL -->
+        <aside class="panel panel-left">
+            <div class="brand">
+                <div class="brand-logo">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <h1>BulkCerts Studio</h1>
+                    <p class="brand-tagline"><i class="fa-solid fa-shield-halved"></i> Client-Side Sandbox</p>
+                </div>
+            </div>
+
+            <div class="panel-scroll">
+                <!-- STEP 1: EXCEL DATA SOURCE -->
+                <section class="studio-card">
+                    <div class="studio-card-header">
+                        <span class="step-badge">1</span>
+                        <h3>Recipient Data (Excel)</h3>
+                    </div>
+                    <div class="studio-card-body">
+                        <div class="upload-zone" id="excel-dropzone">
+                            <div class="pulsing-circle">
+                                <i class="fa-solid fa-file-excel"></i>
+                            </div>
+                            <p class="upload-title">Drop spreadsheet here</p>
+                            <p class="upload-desc">or <span>browse files</span></p>
+                            <input type="file" id="excel-file-input" accept=".xlsx" style="display: none;">
+                        </div>
+                        
+                        <div id="excel-status" class="excel-status-banner hidden">
+                            <div class="excel-status-meta">
+                                <span class="file-name"><i class="fa-solid fa-file-csv"></i> <span id="excel-file-name">file.xlsx</span></span>
+                                <span class="row-count"><b id="excel-row-count">0</b> records loaded</span>
+                            </div>
+                            <button id="remove-excel-btn" class="icon-btn-danger" title="Remove File"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                        
+                        <button id="download-template-btn" class="btn btn-secondary w-full">
+                            <i class="fa-solid fa-cloud-arrow-down"></i> Get Sample Sheet
+                        </button>
+                        
+                        <div id="dynamic-fields-section" class="dynamic-fields hidden">
+                            <p class="panel-section-title">Drag columns to canvas:</p>
+                            <div class="field-tags-container" id="excel-fields-list">
+                                <!-- Dynamic tags go here -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- STEP 2: CERTIFICATE STYLE -->
+                <section class="studio-card">
+                    <div class="studio-card-header">
+                        <span class="step-badge">2</span>
+                        <h3>Certificate Base Style</h3>
+                    </div>
+                    <div class="studio-card-body">
+                        <div class="form-group">
+                            <label for="template-select" class="form-label">Theme Background</label>
+                            <select id="template-select" class="form-select">
+                                <option value="classic">Classic Certificate (Gold & Navy)</option>
+                                <option value="modern">Modern Achievement (Teal & Slate)</option>
+                                <option value="formal">Formal Diploma (Emerald & Gold)</option>
+                                <option value="custom">Custom Background Image</option>
+                            </select>
+                        </div>
+
+                        <div id="custom-bg-container" class="custom-bg-uploader hidden">
+                            <label class="form-label mt-3">Upload Background (PNG/JPG)</label>
+                            <div class="upload-zone compact" id="bg-dropzone">
+                                <i class="fa-solid fa-image"></i>
+                                <p class="upload-desc">Upload background image</p>
+                                <input type="file" id="bg-file-input" accept="image/png, image/jpeg" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- STEP 3: ELEMENTS ADDER -->
+                <section class="studio-card">
+                    <div class="studio-card-header">
+                        <span class="step-badge">3</span>
+                        <h3>Add Custom Overlays</h3>
+                    </div>
+                    <div class="studio-card-body element-buttons">
+                        <button id="add-text-btn" class="btn btn-outline">
+                            <i class="fa-solid fa-font"></i> Add Text
+                        </button>
+                        <div class="upload-zone-btn">
+                            <button id="add-image-trigger" class="btn btn-outline w-full">
+                                <i class="fa-solid fa-file-image"></i> Add Image
+                            </button>
+                            <input type="file" id="image-file-input" accept="image/png, image/jpeg" style="display: none;" multiple>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </aside>
+
+        <!-- COLUMN 2: CENTER CANVAS WORKSPACE -->
+        <main class="studio-workspace">
+            <header class="workspace-header">
+                <div class="header-left">
+                    <h2>Creative Workspace</h2>
+                    <p class="subtitle">A4 Landscape Canvas • 297mm × 210mm</p>
+                </div>
+                <div class="header-actions">
+                    <button id="reset-layout-btn" class="btn btn-outline" title="Restore default positions for placeholders">
+                        <i class="fa-solid fa-rotate-left"></i> Reset Elements
+                    </button>
+                    <button id="clear-custom-btn" class="btn btn-outline btn-outline-danger" title="Clear all custom text and image overlays">
+                        <i class="fa-solid fa-eraser"></i> Clear Canvas
+                    </button>
+                </div>
+            </header>
+
+            <div class="canvas-viewport-container">
+                <div class="canvas-container">
+                    <!-- The Interactive Designer Canvas -->
+                    <canvas id="preview-canvas" width="1188" height="840"></canvas>
+                </div>
+                
+                <div class="workspace-tip">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Select elements to edit styles. Drag to position. Pull corners to resize. Press <b>Delete</b> to clear.</span>
+                </div>
+            </div>
+
+            <!-- Recipient Data Grid Preview -->
+            <section class="data-grid-section">
+                <div class="data-grid-header">
+                    <div class="data-grid-title">
+                        <i class="fa-solid fa-database"></i>
+                        <h3>Spreadsheet Preview</h3>
+                        <span class="badge" id="data-loaded-badge">Empty Dataset</span>
+                    </div>
+                    <div class="row-pager" id="row-pager-controls">
+                        <button id="prev-row-btn" class="pager-btn" disabled><i class="fa-solid fa-arrow-left-long"></i></button>
+                        <span class="pager-text">Record <span id="current-preview-row-num">0</span> of <span id="total-preview-rows-num">0</span></span>
+                        <button id="next-row-btn" class="pager-btn" disabled><i class="fa-solid fa-arrow-right-long"></i></button>
+                    </div>
+                </div>
+                <div class="table-outer-wrapper">
+                    <div class="table-container" id="preview-table-container">
+                        <div class="table-empty-state">
+                            <i class="fa-solid fa-table-cells"></i>
+                            <p>Your spreadsheet rows will load dynamically here.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- COLUMN 3: RIGHT PROPERTIES & EXPORT PANEL -->
+        <aside class="panel panel-right">
+            <div class="panel-scroll flex-grow">
+                <!-- STEP 4: ELEMENT PROPERTIES INSPECTOR -->
+                <section id="inspector-card" class="inspector-card hidden">
+                    <div class="inspector-header">
+                        <i class="fa-solid fa-sliders"></i>
+                        <h3>Properties Inspector</h3>
+                    </div>
+                    <div class="inspector-body">
+                        <!-- Text Elements Inspector Panel -->
+                        <div id="text-inspector" class="inspector-panel hidden">
+                            <div class="form-group">
+                                <label for="text-val-input" class="form-label">Label Text</label>
+                                <textarea id="text-val-input" class="form-input" rows="2"></textarea>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label for="font-family-select" class="form-label">Font Family</label>
+                                    <select id="font-family-select" class="form-select">
+                                        <option value="times">Times Serif</option>
+                                        <option value="helvetica">Helvetica Sans</option>
+                                        <option value="courier">Courier Mono</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="font-size-input" class="form-label">Size (pt)</label>
+                                    <input type="number" id="font-size-input" class="form-input" min="6" max="120" value="12">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label class="form-label">Styling</label>
+                                    <div class="btn-group-toggle">
+                                        <button id="toggle-bold" class="btn-toggle-icon" title="Bold"><i class="fa-solid fa-bold"></i></button>
+                                        <button id="toggle-italic" class="btn-toggle-icon" title="Italic"><i class="fa-solid fa-italic"></i></button>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label class="form-label">Align</label>
+                                    <div class="btn-group-toggle" id="alignment-group">
+                                        <button data-align="left" class="btn-toggle-icon" title="Left"><i class="fa-solid fa-align-left"></i></button>
+                                        <button data-align="center" class="btn-toggle-icon" title="Center"><i class="fa-solid fa-align-center"></i></button>
+                                        <button data-align="right" class="btn-toggle-icon" title="Right"><i class="fa-solid fa-align-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="text-color-input" class="form-label">Color Swatch</label>
+                                <div class="color-picker-wrapper">
+                                    <input type="color" id="text-color-input" class="color-picker">
+                                    <input type="text" id="text-color-hex" class="form-input hex-input" value="#000000" maxlength="7">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Image Elements Inspector Panel -->
+                        <div id="image-inspector" class="inspector-panel hidden">
+                            <div class="form-group">
+                                <label for="image-scale-slider" class="form-label">Image Scale</label>
+                                <div class="slider-wrapper">
+                                    <input type="range" id="image-scale-slider" min="10" max="250" value="50" step="1">
+                                    <span id="image-scale-val" class="slider-value">50 mm</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delete Button -->
+                        <button id="delete-element-btn" class="btn btn-danger w-full mt-3">
+                            <i class="fa-solid fa-trash-can"></i> Delete Selection
+                        </button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- EXPORT GENERATOR PANEL -->
+            <div class="panel-bottom-card">
+                <div class="studio-card">
+                    <div class="studio-card-header">
+                        <span class="step-badge">4</span>
+                        <h3>Export Studio</h3>
+                    </div>
+                    <div class="studio-card-body">
+                        <div class="form-group">
+                            <label for="export-format-select" class="form-label">Package Format</label>
+                            <select id="export-format-select" class="form-select">
+                                <option value="zip">ZIP File (Individual PDFs)</option>
+                                <option value="pdf">Single Combined PDF</option>
+                            </select>
+                        </div>
+
+                        <div class="checkbox-group mb-3">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="watermark-checkbox" checked>
+                                <span class="checkmark"></span>
+                                Add watermark signature
+                            </label>
+                        </div>
+
+                        <button id="generate-btn" class="btn btn-primary w-full btn-lg" disabled>
+                            <i class="fa-solid fa-circle-exclamation"></i> Import Excel data
+                        </button>
+
+                        <div id="progress-container" class="progress-section hidden">
+                            <div class="progress-info">
+                                <span id="progress-status">Rendering documents...</span>
+                                <span id="progress-percentage">0%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div id="progress-bar-fill" class="progress-bar-fill" style="width: 0%;"></div>
+                            </div>
+                            <p id="progress-counter" class="progress-counter">0 / 0 rendered</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Application Script Files (local vendor libs — works offline and without CDN) -->
+    <script src="vendor/xlsx.full.min.js"></script>
+    <script src="vendor/jspdf.umd.min.js"></script>
+    <script src="vendor/jszip.min.js"></script>
+    <script src="templates.js"></script>
+    <script src="generator.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
